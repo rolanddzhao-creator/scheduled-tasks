@@ -8,11 +8,7 @@ response.raise_for_status()
 data = response.json()
 rate = data["cad"]["rate"]
 
-with smtplib.SMTP("smtp.mail.yahoo.com", port=587) as connection:
-    connection.ehlo()
-    connection.starttls()
-    connection.ehlo()
-    
+with smtplib.SMTP_SSL("smtp.mail.yahoo.com", port=465) as connection:
     connection.login(user=yahoo_email, password=yahoo_password)
     msg = f"Subject: Current US to CAD exchange rate\n\n1 US dollar is equal to {rate:.4f} CAD dollars"
     connection.sendmail(from_addr=yahoo_email, to_addrs=lay_email, msg=msg)
