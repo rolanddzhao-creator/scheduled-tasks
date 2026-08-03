@@ -6,7 +6,7 @@ lay_email = os.environ.get("LAY_EMAIL")
 response = requests.get(url="https://www.floatrates.com/daily/usd.json")
 response.raise_for_status()
 data = response.json()
-rate = data["cad"]["rate"]
+rate = float(data["cad"]["rate"])
 
 with smtplib.SMTP_SSL("smtp.gmail.com", port=465) as connection:
     connection.login(user=my_email, password=my_password)
